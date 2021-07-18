@@ -1,0 +1,51 @@
+﻿@model Meta.Web.Models.Materia
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Materia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeMateria" class="control-label"></label>
+                <input asp-for="NomeMateria" class="form-control" />
+                <span asp-validation-for="NomeMateria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+        
+
+            @*<div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><span class="fa fa-group fa-fw" aria-hidden="true"></span></span>
+            @Html.DropDownListFor(x => x.CursoModel.Id, (IEnumerable<SelectListItem>)ViewBag.Curso, new { @class = "form-control" })
+        </div>*@
+
+            <select asp-for="IdCurso"
+                    asp-items="@(new SelectList(Model.CursoModel,"Id","NomeCurso") )" class="form-control">
+                <option>Selecione o curso!</option>
+            </select>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
